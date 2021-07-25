@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="app" lang="en">
+<html ng-app="app" lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Summer Market</title>
@@ -52,7 +52,7 @@
             <td>Название</td>
             <td>Количество</td>
             <td>Цена</td>
-            <td></td>
+            <td>Операции</td>
         </tr>
         </thead>
         <tbody>
@@ -61,11 +61,23 @@
             <td>{{oi.quantity}}</td>
             <td>{{oi.quantity + ' x ' + oi.pricePerProduct + ' = ' + oi.price}}</td>
             <td>
-                <button class="btn btn-danger">Удалить (X)</button>
+                <button class="btn btn-primary" ng-click="addToCart(oi.productId)">+</button>
+                <button class="btn btn-primary" ng-click="decrement(oi.productId)">-</button>
+            </td>
+            <td>
+                <button class="btn btn-danger" ng-click="removeFromCart(oi.productId)">Удалить (X)</button>
             </td>
         </tr>
         </tbody>
     </table>
+
+    <p></p>
+    <h5>Стоимость корзины: {{totalPrice}}</h5>
+    <button class="btn btn-primary" ng-click="decrement(oi.productId)">Total</button>
+    <p></p>
+    <button class="btn btn-danger" ng-click="clearCart()">Очистить корзину</button>
+    <p></p>
+    <button class="btn btn-primary" ng-click="createOrder()">Сделать заказ</button>
 </div>
 </body>
 

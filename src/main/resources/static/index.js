@@ -41,6 +41,53 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         return arr;
     }
 
+    $scope.removeFromCart = function (productId) {
+        $http({
+            url: contextPath + '/cart/remove/' + productId,
+            method: 'GET'
+        }).then(function (response) {
+            $scope.loadCart();
+        });
+    }
+
+    $scope.clearCart = function () {
+        $http({
+            url: contextPath + '/cart/remove',
+            method: 'GET'
+        }).then(function (response) {
+            $scope.loadCart();
+        });
+    }
+
+    $scope.decrement = function (productId) {
+        $http({
+            url: contextPath + '/cart/decrement/' + productId,
+            method: 'GET'
+        }).then(function (response) {
+            $scope.loadCart();
+        });
+    }
+
+    //todo
+    $scope.totalPriceOfCart = function () {
+        $http({
+            url: contextPath + '/cart/price',
+            method: 'GET'
+        }).then(function (response) {
+
+        });
+    }
+
+    $scope.createOrder = function () {
+        $http({
+            url: contextPath + '/orders/create',
+            method: 'POST'
+        }).then(function (response) {
+            $scope.loadCart();
+        });
+    }
+
+    $scope.totalPrice = 0;
     $scope.loadPage();
     $scope.loadCart();
 });

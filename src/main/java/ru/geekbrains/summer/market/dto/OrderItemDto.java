@@ -27,4 +27,14 @@ public class OrderItemDto {
         quantity += amount;
         price = pricePerProduct.multiply(BigDecimal.valueOf(quantity));
     }
+
+
+    public void decrementQuantity() {
+        quantity--;
+        price = new BigDecimal(quantity * pricePerProduct.doubleValue());
+    }
+
+    public boolean isEmpty() {
+        return quantity == 0;
+    }
 }
