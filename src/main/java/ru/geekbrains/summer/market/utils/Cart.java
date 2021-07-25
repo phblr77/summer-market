@@ -41,6 +41,29 @@ public class Cart {
         return false;
     }
 
+    public void decrement(Long productId) {
+        for (OrderItemDto i : items) {
+            if (i.getProductId().equals(productId)) {
+                i.decrementQuantity();
+                if (i.isEmpty()) {
+                    items.remove(i);
+                }
+                recalculate();
+                return;
+            }
+        }
+    }
+
+
+    public void removeByProductId(Long productId) {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).getProductId().equals(productId)) {
+                items.remove(i);
+                recalculate();
+                return;
+            }
+        }
+    }
     public void add(Product product) {
         items.add(new OrderItemDto(product));
         recalculate();

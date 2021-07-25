@@ -28,4 +28,26 @@ public class CartController {
             cart.add(productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Unable add product to cart. Product not found id: " + productId)));
         }
     }
+
+
+    @GetMapping("/remove/{productId}")
+    public void removeProductFromCartById(@PathVariable Long productId) {
+        cart.removeByProductId(productId);
+    }
+
+    @GetMapping("/decrement/{productId}")
+    public void decrementProductFromCartById(@PathVariable Long productId) {
+        cart.decrement(productId);
+    }
+
+    @GetMapping("/remove")
+    public void clearCart() {
+        cart.clear();
+    }
+
+    @GetMapping("/price")
+    public void totalPriceOfCart() {
+        //cart.getPrice();
+        System.out.println(cart.getPrice());
+    }
 }
